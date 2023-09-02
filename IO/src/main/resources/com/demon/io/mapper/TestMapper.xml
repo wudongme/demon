@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demon.io.mapper.TestMapper">
+    <insert id="insertBigDataToGauss">
+        ${sql}
+    </insert>
+    <select id="test1" resultType="java.util.LinkedHashMap">
+        select * from dis_task
+    </select>
+
+    <update id="insertGeneralMap">
+        insert into ${tabName} (${colStr}) values
+        <foreach collection="mapList" separator="," item="map">
+            <!--(<foreach collection="colList" separator="," item="col">#{map.get('${col}')}</foreach> )-->
+            (<foreach collection="map" item="entry" separator=",">#{entry.value}</foreach> )
+        </foreach>
+    </update>
+    <update id="truncate">
+        ${sql}
+    </update>
+</mapper>

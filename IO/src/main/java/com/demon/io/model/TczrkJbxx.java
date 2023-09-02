@@ -1,0 +1,347 @@
+package com.demon.io.model;
+
+import com.huawei.gauss200.jdbc.copy.CopyManager;
+import com.huawei.gauss200.jdbc.core.BaseConnection;
+
+import java.io.Reader;
+import java.io.StringReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+public class TczrkJbxx {
+	public final static String ch_7000 = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+
+	public static String getCh_7000() {
+		return ch_7000;
+	}
+
+	public static void 	main(String[] args) {
+
+	}
+
+
+
+	private final static String dsbm;
+	// 主键，重新设值
+	private Long nid;
+	private static final String dsdm;
+	private static final String rkbm;
+	private static final String gmsfhm;
+	private static final String xm;
+	private static final String x;
+	private static final String m;
+	private static final String hh;
+	private static final String yhzgxdm;
+	private static final String cym;
+	private static final String xbdm;
+	private static final String mzdm;
+	private static final Timestamp csrq;
+	private static final String cssj;
+	private static final String csdGjhdqdm;
+	private static final String csdSsxqdm;
+	private static final String csdQhnxxdz;
+	private static final String jgGjhdqdm;
+	private static final String jgSsxqdm;
+	private static final String jgQhnxxdz;
+	private static final String hjdzDzbm;
+	private static final String hjdzSsxqdm;
+	private static final String hjdzQhnxxdz;
+	private static final String hjdzXzjddm;
+	private static final String hjdzSqjcwhdm;
+	private static final String hjdzCxfldm;
+	private static final String hjdzRhyzbs;
+	private static final String xldm;
+	private static final String hyzkdm;
+	private static final String cyzkZagldwbm;
+	private static final String cyzkDwmc;
+	private static final String cyzkZy;
+	private static final String cyzkZylbdm;
+	private static final String zjxydm;
+	private static final String byzkdm;
+	private static final Double sg;
+	private static final String xxdm;
+	private static final String jhryGmsfhm;
+	private static final String jhryXm;
+	private static final String jhryCyzjdm;
+	private static final String jhryZjhm;
+	private static final String jhryWwx;
+	private static final String jhryWwm;
+	private static final String jhryJhgxdm;
+	private static final String jhryLxdh;
+	private static final String jhreGmsfhm;
+	private static final String jhreXm;
+	private static final String jhreCyzjdm;
+	private static final String jhreZjhm;
+	private static final String jhreWwx;
+	private static final String jhreWwm;
+	private static final String jhreJhgxdm;
+	private static final String jhreLxdh;
+	private static final String fqGmsfhm;
+	private static final String fqXm;
+	private static final String fqCyzjdm;
+	private static final String fqZjhm;
+	private static final String fqWwx;
+	private static final String fqWwm;
+	private static final String mqGmsfhm;
+	private static final String mqXm;
+	private static final String mqCyzjdm;
+	private static final String mqZjhm;
+	private static final String mqWwx;
+	private static final String mqWwm;
+	private static final String poGmsfhm;
+	private static final String poXm;
+	private static final String poCyzjdm;
+	private static final String poZjhm;
+	private static final String poWwx;
+	private static final String poWwm;
+	private static final Timestamp lbsqkQlrrq;
+	private static final String lbsqkQyldyydm;
+	private static final String lbsqkLzdGjhdqdm;
+	private static final String lbsqkLzdSsxqdm;
+	private static final String lbsqkLzdQhnxxdz;
+	private static final Timestamp lkbsqkQlcrq;
+	private static final String lkbsqkQyldyydm;
+	private static final String lkbsqkQwdGjhdqdm;
+	private static final String lkbsqkQwdSsxqdm;
+	private static final String lkbsqkQwdQhnxxdz;
+	private static final String cyjmsfzqkQfjgGajgmc;
+	private static final Timestamp cyjmsfzqkYxqqsrq;
+	private static final String cyjmsfzqkYxqjzrq;
+	private static final String cyjmsfzqkDzmc;
+	private static final Timestamp swrq;
+	private static final String rkglswyydm;
+	private static final String lxdh;
+	private static final String rkxxjbdm;
+	private static final String xmpy;
+	private static final String rkglzxlbdm;
+	private static final Timestamp zxsj;
+	private static final Timestamp gxsj;
+	private static final String sjgsdwdm;
+	private static final String sjgsdwmc;
+	private static final String rkzt;
+	private static final String photoId;
+	private static final String dsbz;
+	private static final String scol3;
+
+	public  TczrkJbxx(){
+	}
+
+	public  TczrkJbxx(Long nid){
+		this.nid = nid;
+	}
+	static  {
+		long currentTimeMillis = System.currentTimeMillis();
+		dsbm ="dsbm";
+		dsdm ="dsdm";
+		rkbm ="asdf";
+		gmsfhm ="asdfasdf";
+		xm ="asdfasdf";
+		x ="asdf";
+		m ="asdf";
+		hh =getCh_7000();
+		yhzgxdm =getCh_7000();
+		cym =getCh_7000();
+		xbdm =getCh_7000();
+		mzdm =getCh_7000();
+		csrq =new Timestamp(currentTimeMillis);
+		cssj =getCh_7000();
+		csdGjhdqdm =getCh_7000();
+		csdSsxqdm =getCh_7000();
+		csdQhnxxdz =getCh_7000();
+		jgGjhdqdm =getCh_7000();
+		jgSsxqdm =getCh_7000();
+		jgQhnxxdz =getCh_7000();
+		hjdzDzbm ="123123";
+		hjdzSsxqdm ="123456";
+		hjdzQhnxxdz =getCh_7000();
+		hjdzXzjddm ="123213";
+		hjdzSqjcwhdm ="12312";
+		hjdzCxfldm ="123";
+		hjdzRhyzbs ="1";
+		xldm ="11";
+		hyzkdm ="11";
+		cyzkZagldwbm ="1231231";
+		cyzkDwmc =getCh_7000();
+		cyzkZy ="csd_q";
+		cyzkZylbdm ="12";
+		zjxydm ="12";
+		byzkdm ="1";
+		sg =111.1;
+		xxdm ="1";
+		jhryGmsfhm ="jhryGmsfhm";
+		jhryXm ="jhryXm";
+		jhryCyzjdm ="123";
+		jhryZjhm ="jhryZjhm";
+		jhryWwx ="jhryWwx";
+		jhryWwm ="jhryWwm";
+		jhryJhgxdm ="12";
+		jhryLxdh ="jhryLxdh";
+		jhreGmsfhm ="jhreGmsfhm";
+		jhreXm ="jhreXm";
+		jhreCyzjdm ="123";
+		jhreZjhm ="jhreZjhm";
+		jhreWwx ="jhreWwx";
+		jhreWwm ="jhreWwm";
+		jhreJhgxdm ="12";
+		jhreLxdh ="csd_q";
+		fqGmsfhm ="fqGmsfhm";
+		fqXm ="fqXm";
+		fqCyzjdm ="123";
+		fqZjhm ="fqZjhm";
+		fqWwx ="fqWwx";
+		fqWwm ="fqWwm";
+		mqGmsfhm ="mqGmsfhm";
+		mqXm ="mqXm";
+		mqCyzjdm ="123";
+		mqZjhm ="mqZjhm";
+		mqWwx ="mqWwx";
+		mqWwm ="mqWwm";
+		poGmsfhm ="poGmsfhm";
+		poXm ="poXm";
+		poCyzjdm ="123";
+		poZjhm ="poZjhm";
+		poWwx ="poWwx";
+		poWwm ="poWwm";
+		lbsqkQlrrq =new Timestamp(System.currentTimeMillis());
+		lbsqkQyldyydm ="123";
+		lbsqkLzdGjhdqdm ="123";
+		lbsqkLzdSsxqdm ="123221";
+		lbsqkLzdQhnxxdz ="csd_q";
+		lkbsqkQlcrq =new Timestamp(currentTimeMillis);
+		lkbsqkQyldyydm ="1";
+		lkbsqkQwdGjhdqdm ="12";
+		lkbsqkQwdSsxqdm ="123";
+		lkbsqkQwdQhnxxdz ="csd_q";
+		cyjmsfzqkQfjgGajgmc ="123456";
+		cyjmsfzqkYxqqsrq =new Timestamp(currentTimeMillis);
+		cyjmsfzqkYxqjzrq ="12345678";
+		cyjmsfzqkDzmc ="1234567";
+		swrq =new Timestamp(currentTimeMillis);
+		rkglswyydm ="123";
+		lxdh ="lxdh";
+		rkxxjbdm =getCh_7000();
+		xmpy =getCh_7000();
+		rkglzxlbdm =getCh_7000();
+		zxsj =new Timestamp(currentTimeMillis);
+		gxsj =new Timestamp(currentTimeMillis);
+		sjgsdwdm =getCh_7000();
+		sjgsdwmc =getCh_7000();
+		rkzt =getCh_7000();
+		photoId =getCh_7000();
+		dsbz =getCh_7000();
+		scol3 =getCh_7000();
+	}
+
+	public static void generateInsertSqlBatch(StringBuilder sb, Long id) {
+		sb.append("(");
+		sb.append("'" + dsbm+"', ");
+		// nid
+		sb.append("'" + id+"', ");
+		sb.append("'" + dsdm+"', ");
+		sb.append("'" + rkbm+"', ");
+		sb.append("'" + gmsfhm+"', ");
+		sb.append("'" + xm+"', ");
+		sb.append("'" + x+"', ");
+		sb.append("'" + m+"', ");
+		sb.append("'" + hh+"', ");
+		sb.append("'" + yhzgxdm+"', ");
+		sb.append("'" + cym+"', ");
+		sb.append("'" + xbdm+"', ");
+		sb.append("'" + mzdm+"', ");
+		sb.append("'" + csrq+"', ");
+		sb.append("'" + cssj+"', ");
+		sb.append("'" + csdGjhdqdm+"', ");
+		sb.append("'" + csdSsxqdm+"', ");
+		sb.append("'" + csdQhnxxdz+"', ");
+		sb.append("'" + jgGjhdqdm+"', ");
+		sb.append("'" + jgSsxqdm+"', ");
+		sb.append("'" + jgQhnxxdz+"', ");
+		sb.append("'" + hjdzDzbm+"', ");
+		sb.append("'" + hjdzSsxqdm+"', ");
+		sb.append("'" + hjdzQhnxxdz+"', ");
+		sb.append("'" + hjdzXzjddm+"', ");
+		sb.append("'" + hjdzSqjcwhdm+"', ");
+		sb.append("'" + hjdzCxfldm+"', ");
+		sb.append("'" + hjdzRhyzbs+"', ");
+		sb.append("'" + xldm+"', ");
+		sb.append("'" + hyzkdm+"', ");
+		sb.append("'" + cyzkZagldwbm+"', ");
+		sb.append("'" + cyzkDwmc+"', ");
+		sb.append("'" + cyzkZy+"', ");
+		sb.append("'" + cyzkZylbdm+"', ");
+		sb.append("'" + zjxydm+"', ");
+		sb.append("'" + byzkdm+"', ");
+		sb.append("'" + sg+"', ");
+		sb.append("'" + xxdm+"', ");
+		sb.append("'" + jhryGmsfhm+"', ");
+		sb.append("'" + jhryXm+"', ");
+		sb.append("'" + jhryCyzjdm+"', ");
+		sb.append("'" + jhryZjhm+"', ");
+		sb.append("'" + jhryWwx+"', ");
+		sb.append("'" + jhryWwm+"', ");
+		sb.append("'" + jhryJhgxdm+"', ");
+		sb.append("'" + jhryLxdh+"', ");
+		sb.append("'" + jhreGmsfhm+"', ");
+		sb.append("'" + jhreXm+"', ");
+		sb.append("'" + jhreCyzjdm+"', ");
+		sb.append("'" + jhreZjhm+"', ");
+		sb.append("'" + jhreWwx+"', ");
+		sb.append("'" + jhreWwm+"', ");
+		sb.append("'" + jhreJhgxdm+"', ");
+		sb.append("'" + jhreLxdh+"', ");
+		sb.append("'" + fqGmsfhm+"', ");
+		sb.append("'" + fqXm+"', ");
+		sb.append("'" + fqCyzjdm+"', ");
+		sb.append("'" + fqZjhm+"', ");
+		sb.append("'" + fqWwx+"', ");
+		sb.append("'" + fqWwm+"', ");
+		sb.append("'" + mqGmsfhm+"', ");
+		sb.append("'" + mqXm+"', ");
+		sb.append("'" + mqCyzjdm+"', ");
+		sb.append("'" + mqZjhm+"', ");
+		sb.append("'" + mqWwx+"', ");
+		sb.append("'" + mqWwm+"', ");
+		sb.append("'" + poGmsfhm+"', ");
+		sb.append("'" + poXm+"', ");
+		sb.append("'" + poCyzjdm+"', ");
+		sb.append("'" + poZjhm+"', ");
+		sb.append("'" + poWwx+"', ");
+		sb.append("'" + poWwm+"', ");
+		sb.append("'" + lbsqkQlrrq+"', ");
+		sb.append("'" + lbsqkQyldyydm+"', ");
+		sb.append("'" + lbsqkLzdGjhdqdm+"', ");
+		sb.append("'" + lbsqkLzdSsxqdm+"', ");
+		sb.append("'" + lbsqkLzdQhnxxdz+"', ");
+		sb.append("'" + lkbsqkQlcrq+"', ");
+		sb.append("'" + lkbsqkQyldyydm+"', ");
+		sb.append("'" + lkbsqkQwdGjhdqdm+"', ");
+		sb.append("'" + lkbsqkQwdSsxqdm+"', ");
+		sb.append("'" + lkbsqkQwdQhnxxdz+"', ");
+		sb.append("'" + cyjmsfzqkQfjgGajgmc+"', ");
+		sb.append("'" + cyjmsfzqkYxqqsrq+"', ");
+		sb.append("'" + cyjmsfzqkYxqjzrq+"', ");
+		sb.append("'" + cyjmsfzqkDzmc+"', ");
+		sb.append("'" + swrq+"', ");
+		sb.append("'" + rkglswyydm+"', ");
+		sb.append("'" + lxdh+"', ");
+		sb.append("'" + rkxxjbdm+"', ");
+		sb.append("'" + xmpy+"', ");
+		sb.append("'" + rkglzxlbdm+"', ");
+		sb.append("'" + zxsj+"', ");
+		sb.append("'" + gxsj+"', ");
+		sb.append("'" + sjgsdwdm+"', ");
+		sb.append("'" + sjgsdwmc+"', ");
+		sb.append("'" + rkzt+"', ");
+		sb.append("'" + photoId+"', ");
+		sb.append("'" + dsbz+"', ");
+		sb.append("'" + scol3+"' ");
+
+		sb.append("),");
+
+	}
+
+
+
+}

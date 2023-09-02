@@ -1,0 +1,100 @@
+
+
+
+spring:
+  http:
+    encoding:
+      charset: GBK
+      enabled: true
+      force: true
+  application:
+    name: demon
+  datasource:
+    # dis_dev_oem_h_0101 ome一屏统揽 dis_dev_0422
+    url: jdbc:mysql://172.16.2.59:3306/paradise?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useInformationSchema=true&serverTimezone=GMT%2B8
+    #url: jdbc:mysql://vm2/test_mysql?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useInformationSchema=true&serverTimezone=GMT%2B8
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    # h2
+#    url: jdbc:h2:mem:testdb
+#    #url: jdbc:mysql://vm2/test_mysql?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useInformationSchema=true&serverTimezone=GMT%2B8
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#  h2:
+#    console:
+#      enabled: true
+
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 8
+      min-idle: 1
+      max-active: 200
+      max-wait: 60000
+      time-between-eviction-runsMillis: 60000
+      min-evictable-idle-timeMillis: 300000
+      validation-query: select 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      max-pool-prepared-statement-per-connection-size: 20
+#  #
+#  redis:
+#    database: 11
+#    host: 172.16.2.104
+#    password: Audaque@123
+#    port: 7379
+mybatis:
+  config-location: classpath:mybatis-config.xml
+#mybatis:
+#  configuration:
+#    interceptors:
+#      - com.demon.io.inteceptor.MyInterceptor
+##################################高斯#################################
+#############################gauss###############################
+#spring:
+#  application:
+#    name: demon
+#
+#  datasource:
+#    # dis_dev_oem_h_0101 ome一屏统揽 dis_dev_0422
+#    url: jdbc:gaussdb://172.16.2.110:25308/dcf_user?currentSchema=dcf_lx
+#    #url: jdbc:mysql://vm2/test_mysql?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useInformationSchema=true&serverTimezone=GMT%2B8
+#    username: dcf_user
+#    password: 1qaz@WSX
+#    driver-class-name: com.huawei.gauss200.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      initial-size: 8
+#      min-idle: 1
+#      max-active: 200
+#      max-wait: 60000
+#      time-between-eviction-runsMillis: 60000
+#      min-evictable-idle-timeMillis: 300000
+#      validation-query: select 1
+#      test-while-idle: true
+#      test-on-borrow: false
+#      test-on-return: false
+#      pool-prepared-statements: true
+#      max-open-prepared-statements: 20
+#      max-pool-prepared-statement-per-connection-size: 20
+############################################################
+#mybatis:
+#  config-location: classpath:mybatis-config.xml
+#  mapper-locations: classpath*:com/demon/io/**/mapper/*.xml
+#  type-handlers-package: com.audaque.cloud.common.persistence.mybatis.handler
+server:
+  tomcat:
+    uri-encoding: GBK
+  port: 8082
+file:
+  path: testfile
+  batch:
+    size: 200000
+circle:
+  start: 1
+  end: 4
