@@ -1,5 +1,7 @@
-
-
+#logging:
+#  config: classpath:log4j2-file.xml
+#  level:
+#    root: info
 
 spring:
   http:
@@ -90,7 +92,7 @@ mybatis:
 server:
   tomcat:
     uri-encoding: GBK
-  port: 8082
+  port: 8988
 file:
   path: testfile
   batch:

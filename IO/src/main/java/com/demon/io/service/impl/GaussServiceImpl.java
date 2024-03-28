@@ -1,6 +1,5 @@
 package com.demon.io.service.impl;
 
-import com.audaque.cloud.common.utils.FileUtil;
 import com.audaque.cloud.common.utils.SnowflakeUtils;
 import com.demon.io.mapper.TestMapper;
 import com.demon.io.model.TczrkJbxx;
@@ -16,7 +15,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -41,6 +45,7 @@ public class GaussServiceImpl implements GaussService {
 	@Autowired
 	@Lazy
 	GaussService gaussService;
+
 	@Override
 	public void insertBigDataToGauss(int suffix) {
 		// todo 固定好大小
@@ -92,13 +97,17 @@ public class GaussServiceImpl implements GaussService {
 		}
 	}
 
-	public static final ExecutorService EXECUTORS = new ThreadPoolExecutor(5, 5, 10L, TimeUnit.SECONDS, new LinkedBlockingQueue(100));;
+	public static final ExecutorService EXECUTORS = new ThreadPoolExecutor(5, 5, 10L, TimeUnit.SECONDS,
+			new LinkedBlockingQueue(100));
+	;
 
 	int count;
+
 	@Override
 	public void copyManagerMultiThread(int suffix) {
 		String currentDir = System.getProperty("user.dir");
-		String startFilePath = currentDir + File.separator + filePathPrefix + File.separator + "file_"+(start)+".txt";
+		String startFilePath =
+				currentDir + File.separator + filePathPrefix + File.separator + "file_" + (start) + ".txt";
 
 		new Thread(() -> {
 			log.info("初始化");
@@ -107,11 +116,13 @@ public class GaussServiceImpl implements GaussService {
 			for (int i = start; i <= end; i++) {
 
 				if (end != i) {
-					String nextFilePath = currentDir + File.separator + filePathPrefix + File.separator + "file_"+(i+1)+".txt";
+					String nextFilePath =
+							currentDir + File.separator + filePathPrefix + File.separator + "file_" + (i + 1) + ".txt";
 					EXECUTORS.execute(() -> generateFile(nextFilePath));
 				}
 
-				String curFilePath = currentDir + File.separator + filePathPrefix + File.separator + "file_"+i+".txt";
+				String curFilePath =
+						currentDir + File.separator + filePathPrefix + File.separator + "file_" + i + ".txt";
 				String tabName = "t_czrk_jbxx_" + i;
 				new WriteFromFileByCopyManager(curFilePath, tabName).run();
 
@@ -182,11 +193,11 @@ public class GaussServiceImpl implements GaussService {
 
 				reader = new FileReader(filePath);
 				l4 = System.currentTimeMillis();
-				log.info(threadName + "获取连接、copyManger耗时{}ms", l4- l1);
+				log.info(threadName + "获取连接、copyManger耗时{}ms", l4 - l1);
 
-				copyManager.copyIn("COPY " + tabName +" FROM STDIN WITH CSV", reader);
+				copyManager.copyIn("COPY " + tabName + " FROM STDIN WITH CSV", reader);
 				long l6 = System.currentTimeMillis();
-				log.info(threadName + "copy耗时{}毫秒", l6 -l4);
+				log.info(threadName + "copy耗时{}毫秒", l6 - l4);
 				log.info(threadName + "===========================");
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -249,7 +260,7 @@ public class GaussServiceImpl implements GaussService {
 			StringBuilder sb = new StringBuilder();
 			long l1 = System.currentTimeMillis();
 			int batch = 1;
-			int size =5000;
+			int size = 5000;
 			for (int j = 0; j < batch; j++) {
 				Connection conn = null;
 				CopyManager copyManager = null;
@@ -264,11 +275,11 @@ public class GaussServiceImpl implements GaussService {
 				//log.info(threadName + "构建reader耗时{}毫秒", l5 -l4);
 				try {
 					Class.forName("com.huawei.gauss200.jdbc.Driver");
-					conn = DriverManager.getConnection("jdbc:gaussdb://172.16.2.110:25308/dcf_user?currentSchema=dcf_lx",
-							"dcf_user", "1qaz@WSX");
+					conn = DriverManager.getConnection(
+							"jdbc:gaussdb://172.16.2.110:25308/dcf_user?currentSchema=dcf_lx", "dcf_user", "1qaz@WSX");
 					copyManager = new CopyManager((BaseConnection) conn);
 					long l4 = System.currentTimeMillis();
-					log.info(threadName + "获取连接、copyManger耗时{}ms", l4- l1);
+					log.info(threadName + "获取连接、copyManger耗时{}ms", l4 - l1);
 					copyManager.copyIn("COPY dont_delete_otherwise_fuck_your_ass FROM STDIN WITH CSV", stringReader);
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -286,7 +297,7 @@ public class GaussServiceImpl implements GaussService {
 					}
 				}
 				long l6 = System.currentTimeMillis();
-				log.info(threadName + "写入耗时{}毫秒", l6 -l5);
+				log.info(threadName + "写入耗时{}毫秒", l6 - l5);
 			}
 			log.info(threadName + "===========================");
 		}
@@ -300,10 +311,11 @@ public class GaussServiceImpl implements GaussService {
 	public static void main(String[] args) {
 		new GaussServiceImpl().testCopyManager(null);
 	}
+
 	public void testCopyManager(String prefix) {
 		StringBuilder sb = new StringBuilder();
 		long l1 = System.currentTimeMillis();
-		int size =1000;
+		int size = 1000;
 		for (int i = 0; i < size; i++) {
 			TczrkJbxx tCzrkJbxx = new TczrkJbxx();
 			long l = SnowflakeUtils.nextId();
@@ -311,7 +323,7 @@ public class GaussServiceImpl implements GaussService {
 			//tCzrkJbxx.generateCsv(sb, tCzrkJbxx);
 		}
 		long l2 = System.currentTimeMillis();
-		log.info("生成{}行sql用了{}毫秒",size, l2 - l1);
+		log.info("生成{}行sql用了{}毫秒", size, l2 - l1);
 		sb.setLength(sb.length() - 2);
 		long l3 = System.currentTimeMillis();
 		log.info("setLength用了{}毫秒", l3 - l2);
@@ -323,13 +335,15 @@ public class GaussServiceImpl implements GaussService {
 					"dcf_user", "1qaz@WSX");
 			copyManager = new CopyManager((BaseConnection) conn);
 			long l4 = System.currentTimeMillis();
-			log.info("获取连接、copyManger耗时{}ms", l4- l3);
+			log.info("获取连接、copyManger耗时{}ms", l4 - l3);
 			Reader stringReader = new StringReader(sb.toString());
 			long l5 = System.currentTimeMillis();
-			log.info("构建reader耗时{}毫秒", l5 -l4);
-			copyManager.copyIn("COPY dont_delete_otherwise_fuck_your_ass (dsbm,dsdm,rkbm,gmsfhm,xm,x,m,hh,yhzgxdm,cym,xbdm,mzdm,csrq,cssj,csdgjhdqdm,csdssxqdm,csdqhnxxdz,jggjhdqdm,jgssxqdm,jgqhnxxdz,hjdzdzbm,hjdzssxqdm,hjdzqhnxxdz,hjdzxzjddm,hjdzsqjcwhdm,hjdzcxfldm,hjdzrhyzbs,xldm,hyzkdm,cyzkzagldwbm,cyzkdwmc,cyzkzy,cyzkzylbdm,zjxydm,byzkdm,sg,xxdm,jhrygmsfhm,jhryxm,jhrycyzjdm,jhryzjhm,jhrywwx,jhrywwm,jhryjhgxdm,jhrylxdh,jhregmsfhm,jhrexm,jhrecyzjdm,jhrezjhm,jhrewwx,jhrewwm,jhrejhgxdm,jhrelxdh,fqgmsfhm,fqxm,fqcyzjdm,fqzjhm,fqwwx,fqwwm,mqgmsfhm,mqxm,mqcyzjdm,mqzjhm,mqwwx,mqwwm,pogmsfhm,poxm,pocyzjdm,pozjhm,powwx,powwm,lbsqkqlrrq,lbsqkqyldyydm,lbsqklzdgjhdqdm,lbsqklzdssxqdm,lbsqklzdqhnxxdz,lkbsqkqlcrq,lkbsqkqyldyydm,lkbsqkqwdgjhdqdm,lkbsqkqwdssxqdm,lkbsqkqwdqhnxxdz,cyjmsfzqkqfjggajgmc,cyjmsfzqkyxqqsrq,cyjmsfzqkyxqjzrq,cyjmsfzqkdzmc,swrq,rkglswyydm,lxdh,rkxxjbdm,xmpy,rkglzxlbdm,zxsj,gxsj,sjgsdwdm,sjgsdwmc,rkzt,photoid,hckrksj,hckgxsj,dsbz,scol3) FROM STDIN WITH CSV", stringReader);
+			log.info("构建reader耗时{}毫秒", l5 - l4);
+			copyManager.copyIn(
+					"COPY dont_delete_otherwise_fuck_your_ass (dsbm,dsdm,rkbm,gmsfhm,xm,x,m,hh,yhzgxdm,cym,xbdm,mzdm,csrq,cssj,csdgjhdqdm,csdssxqdm,csdqhnxxdz,jggjhdqdm,jgssxqdm,jgqhnxxdz,hjdzdzbm,hjdzssxqdm,hjdzqhnxxdz,hjdzxzjddm,hjdzsqjcwhdm,hjdzcxfldm,hjdzrhyzbs,xldm,hyzkdm,cyzkzagldwbm,cyzkdwmc,cyzkzy,cyzkzylbdm,zjxydm,byzkdm,sg,xxdm,jhrygmsfhm,jhryxm,jhrycyzjdm,jhryzjhm,jhrywwx,jhrywwm,jhryjhgxdm,jhrylxdh,jhregmsfhm,jhrexm,jhrecyzjdm,jhrezjhm,jhrewwx,jhrewwm,jhrejhgxdm,jhrelxdh,fqgmsfhm,fqxm,fqcyzjdm,fqzjhm,fqwwx,fqwwm,mqgmsfhm,mqxm,mqcyzjdm,mqzjhm,mqwwx,mqwwm,pogmsfhm,poxm,pocyzjdm,pozjhm,powwx,powwm,lbsqkqlrrq,lbsqkqyldyydm,lbsqklzdgjhdqdm,lbsqklzdssxqdm,lbsqklzdqhnxxdz,lkbsqkqlcrq,lkbsqkqyldyydm,lkbsqkqwdgjhdqdm,lkbsqkqwdssxqdm,lkbsqkqwdqhnxxdz,cyjmsfzqkqfjggajgmc,cyjmsfzqkyxqqsrq,cyjmsfzqkyxqjzrq,cyjmsfzqkdzmc,swrq,rkglswyydm,lxdh,rkxxjbdm,xmpy,rkglzxlbdm,zxsj,gxsj,sjgsdwdm,sjgsdwmc,rkzt,photoid,hckrksj,hckgxsj,dsbz,scol3) FROM STDIN WITH CSV",
+					stringReader);
 			long l6 = System.currentTimeMillis();
-			log.info("写入耗时{}毫秒", l6 -l5);
+			log.info("写入耗时{}毫秒", l6 - l5);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -348,13 +362,13 @@ public class GaussServiceImpl implements GaussService {
 		StringBuilder sb = new StringBuilder();
 		sb.append(prefix);
 		long l1 = System.currentTimeMillis();
-		int size =100;
+		int size = 100;
 		for (int i = 0; i < size; i++) {
 			TczrkJbxx tCzrkJbxx = new TczrkJbxx();
 			//tCzrkJbxx.generateInsertSqlBatch(sb, tCzrkJbxx);
 		}
 		long l2 = System.currentTimeMillis();
-		log.info("生成{}行sql用了{}毫秒",size, l2 - l1);
+		log.info("生成{}行sql用了{}毫秒", size, l2 - l1);
 		sb.setLength(sb.length() - 2);
 		long l3 = System.currentTimeMillis();
 		log.info("setLength用了{}毫秒", l3 - l2);

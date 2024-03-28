@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+    <Properties>
+        <Property name="baseDir">${sys:user.dir}/logs</Property>
+        <Property name="fileName">${baseDir}/wudongmo.log</Property>
+        <Property name="filePattern">${baseDir}/wudongmo-%d{yyyy-MM-dd}-%i.log</Property>
+    </Properties>
+    <Filter type="ThresholdFilter" level="trace"/>
+
+    <Appenders>
+        <!--控制台输出 -->
+        <Console name="stdout" target="SYSTEM_OUT">
+            <AdqPatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} [%-5p] [%-20t] %c %enc{%m}{JSON}%n">
+            </AdqPatternLayout>
+        </Console>
+        <!-- 文件输出 -->
+        <RollingFile name="file" append="true" fileName="${fileName}" filePattern="${filePattern}" filePermissions="rw-------">
+            <AdqPatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} [%-5p] [%-20t] %c %m%n{JSON}">
+                <Property name="idCard,身份证,证件号">(\d{17}[0-9Xx]|\d{14}[0-9Xx])</Property>
+                <Property name="mobile,Phone,phone,电话,手机">(?:(?:1[3456789]\d{9})|(?:861[356789]\d{9}))(?!\d)</Property>
+                <Property name="Session,SESSIONID,sessionId,SessionId,sessionid">[A-Za-z\d]{8}(-[A-Za-z\d]{4}){3}-[A-Za-z\d]{12}</Property>
+                <Property name="ticket=,token,jdbcUrl">not_print</Property>
+                <Property name="password,PASSWORD,pass,Pass,PWD,pwd">not_print</Property>
+                <Property name="RSA,rsa,AES,aes">not_print</Property>
+                <Property name="SessionIndex,AdqDispatcherServlet">not_print</Property>
+                <Property name="org.apache.http">not_print_ip</Property>
+            </AdqPatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy/>
+                <!-- 单个日志最大文件大小 -->
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <!-- 日志最大保留数量 -->
+                <DefaultRolloverStrategy max="10">
+                    <Delete basePath="${baseDir}" maxDepth="1">
+                        <IfFileName glob="*.log">
+                            <IfLastModified age="30d">
+                                <IfAny>
+                                    <IfAccumulatedFileSize exceeds="2 GB"/>
+                                    <IfAccumulatedFileCount exceeds="100"/>
+                                </IfAny>
+                            </IfLastModified>
+                        </IfFileName>
+                    </Delete>
+                </DefaultRolloverStrategy>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="stdout"/>
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
