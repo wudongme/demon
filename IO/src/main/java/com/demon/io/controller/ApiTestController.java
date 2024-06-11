@@ -2,10 +2,13 @@ package com.demon.io.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +20,34 @@ import java.util.Map;
  */
 @RestController
 public class ApiTestController {
+	String ss = "{\n" + "\t\"errno\": \"0\",\n" + "\t\"errmsg\": \"正常\",\n" + "\t\"consume\": \"4\",\n"
+			+ "\t\"total\": \"8272\",\n" + "\t\"data\": [\n" + "\t\t{\n" + "\t\t\t\"pid\": \"324771\",\n"
+			+ "\t\t\t\"cid\": \"9\",\n" + "\t\t\t\"dl_cnt\": \"0\",\n" + "\t\t\t\"c_t\": \"2019-03-25 18:12:48\",\n"
+			+ "\t\t\t\"imgcut\": \"0\",\n" + "\t\t\t\"url\": \"hsdsdsqh.jpg\",\n"
+			+ "\t\t\t\"tempdata\": \"\",\n" + "\t\t\t\"fav_total\": \"8965\"\n" + "\t\t}\n" + "\t]\n" + "}";
+
+	@PostMapping("db_api_all_field")
+	public Object db_api_all_field(@RequestBody Map<String, Object> map) {
+		List<Object> list = (List<Object>) map.get("data");
+		if (list != null) {
+			System.out.println("接收数组长度：" + list.size());
+		}
+		System.out.println(map);
+		Object parse = JSONObject.parse(ss);
+		return parse;
+	}
+
+	@GetMapping("oem0510")
+	public Object oem0510() {
+		Object parse = JSONObject.parse(ss);
+		return parse;
+	}
+
+	@GetMapping("empty")
+	public Object empty() {
+		return Collections.emptyList();
+	}
+
 	@GetMapping("testapi")
 	public Object testapi() {
 		String res = "{\"code\":200,\"data\":[{\"id\":\"1\",\"formName\":\"name1\",\"fields\":[{\"fieldName\":\"企业名称1\",\"fieldTitle\":\"input843950\"},{\"fieldName\":\"企业名称2\",\"fieldTitle\":\"input843951\"}],\"datas\":[{\"id\":\"11\",\"reportDept\":\"部门1\",\"reportUser\":\"用户11\",\"reportMobile\":\"123333333\",\"createTime\":\"20240101\",\"content\":{}},{\"id\":\"12\",\"reportDept\":\"部门1\",\"reportUser\":\"用户11\",\"reportMobile\":\"123333333\",\"createTime\":\"20240101\",\"content\":{}}]}],\"errMsg\":\"成功\",\"success\":true}";

@@ -1,0 +1,19 @@
+{
+  "name": "xiaoming2",
+  "number": "0123-4567-8",
+  "address": {
+    "city": "nara2",
+    "streetAddress": "naist street2"
+  },
+  "type": "phone2",
+  "phoneNumbers": [
+    {
+      "type": "phone1",
+      "number": "0123-4567-8"
+    },
+    {
+      "type": "phone2",
+      "number": "0123-4567-8"
+    }
+  ]
+}

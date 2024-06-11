@@ -16,6 +16,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.HttpEntityWrapper;
 import org.apache.http.entity.StringEntity;
@@ -41,6 +42,42 @@ import java.util.LinkedHashMap;
  */
 public class ApacheHttpTest {
 	public static void main(String[] args) throws UnsupportedEncodingException {
+
+
+
+		//		String url = "http://127.0.0.1:32127/datax/external/build/callbackId";
+		String url = "http://43.139.67.113/email/go2/zj/get.php";
+		HttpGet httpGet =  new HttpGet(url);
+		/*HttpPost httpPost = new HttpPost(url);
+		httpPost.setHeader("X-TIMESTAMP", time);
+		httpPost.setHeader("X-SIGN", signData);
+		httpPost.setHeader("X-NONCE", nonce);
+		httpPost.setHeader("adq-tenant-id", "0");
+		httpPost.setHeader("Content-Type", "application/json;charset=utf8");*/
+
+		/*httpPost.setEntity(new StringEntity(body));*/
+		//		3.创建CloseableHttpResponse
+		CloseableHttpResponse response = null;
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
+		try {
+			response = httpClient.execute(httpGet);
+			HttpEntity responseEntity = response.getEntity();
+			System.out.println("code=" + response.getStatusLine());
+
+			if (responseEntity != null) {
+				System.out.println("内容=" + EntityUtils.toString(responseEntity));
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(httpClient);
+			IOUtils.closeQuietly(response);
+		}
+
+	}
+	/*public static void main(String[] args) throws UnsupportedEncodingException {
 		//		1.创建CloseableHttpClient
 		//		2.创建httpPost：
 		//		设置url，entity，config，header
@@ -50,8 +87,8 @@ public class ApacheHttpTest {
 		String body = null;
 		ObjectMapper mapper = new ObjectMapper();
 
-		/*LinkedHashMap<String,Object> dataMap = mapper.readValue(new File("E:\\dis\\2023-11\\100051TO100053.json"),
-				LinkedHashMap.class);*/
+		*//*LinkedHashMap<String,Object> dataMap = mapper.readValue(new File("E:\\dis\\2023-11\\100051TO100053.json"),
+				LinkedHashMap.class);*//*
 		LinkedHashMap<String,Object> dataMap = null;
 
 		try {
@@ -121,7 +158,7 @@ public class ApacheHttpTest {
 			IOUtils.closeQuietly(response);
 		}
 
-	}
+	}*/
 
 	public static void testDecode(long requestTime, String nonce, String bodyStr, String paramSign) {
 		System.out.println(bodyStr.hashCode());

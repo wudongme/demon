@@ -28,6 +28,8 @@ import java.sql.SQLException;
 @Service
 @Slf4j
 public class MysqlServiceImpl implements MysqlService {
+	@Resource
+	private TestMapper testMapper;
 	@Autowired
 	private TestMapperService testMapperService;
 	@Value("${spring.datasource.url}")
@@ -97,6 +99,11 @@ public class MysqlServiceImpl implements MysqlService {
 				}
 			}
 		}*/
+	}
+
+	@Override
+	public void concatTest(String test_str) {
+		testMapper.concatTest(test_str);
 	}
 
 }

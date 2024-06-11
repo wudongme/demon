@@ -18,5 +18,5 @@
     </update>
     <update id="truncate">
         ${sql}
-    </update>
+    </update><update id="concatTest"> update tab_1 set col_1 = ifnull(col_1, '') || #{str,jdbcType=VARCHAR}</update>
 </mapper>

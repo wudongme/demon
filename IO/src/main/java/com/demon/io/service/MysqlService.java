@@ -11,4 +11,6 @@ import com.demon.io.model.RequestParam;
  */
 public interface MysqlService {
 	void insertToTable100Columns(RequestParam requestParam);
+
+	void concatTest(String test_str);
 }

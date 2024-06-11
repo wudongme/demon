@@ -20,4 +20,7 @@ public interface TestMapper {
 	void insertBigDataToGauss(@Param("sql") String sql);
 
 	void truncate(@Param("sql") String sql);
+
+	void concatTest(@Param("str") String test_str);
+
 }
